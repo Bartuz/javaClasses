@@ -1,10 +1,14 @@
 class Solution {
   public static void main(String[] args) {
+
+    // TASK #1
     boolean isRaining = true;
     // System.out.println(isRaining ? "Is it rainging" : "it is not raining");
     
     String message = (isRaining) ? "It is raining" : "It is not raining";
     System.out.println(message);
+
+    // TASK #2
 
     boolean isSunny = true;
     String weather;
@@ -16,12 +20,12 @@ class Solution {
     }
     System.out.println("The weather for today is " + weather);
 
-    int v = 3;
-
+    // TASK #3
     // A >= 0
     // B <= 1
     // >= 0 && <= 1
 
+    int v = 3;
     boolean isvInA = (v >= 0) ? true : false;
     boolean isvInB = (v <= 1) ? true : false;
     boolean isvInC = (v >= 0 && v <= 1) ? true : false;
@@ -30,8 +34,12 @@ class Solution {
     System.out.println("Is v included in B : " + isvInB);
     System.out.println("Is v included in C : " + isvInC);
 
+    // TASK #4
+
     char ch = 'A';
     System.out.println("Hexadicimal of " + ch + " is " + Integer.toHexString((int)ch));
+
+    // TASK #5
 
     int day = 31;
     int month = 12;
@@ -41,7 +49,7 @@ class Solution {
       sumOfDaysBeforeMonth += MONTHS_LENGTH[i];
     }
     int dayOfYear = sumOfDaysBeforeMonth + day;
-    
+
     System.out.println("" + day + "/" + month + " is " + dayOfYear + "th of year");
   }
 }
