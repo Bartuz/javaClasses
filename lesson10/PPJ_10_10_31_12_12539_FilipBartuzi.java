@@ -67,6 +67,10 @@ class PPJ_10_10_31_12_12539_FilipBartuzi {
 
     // 0
 
+    /*
+      TASK 6
+    */
+
     int array3[][] = new int[4][5];
 
     for (int i = 0; i < array3.length; i++) {
