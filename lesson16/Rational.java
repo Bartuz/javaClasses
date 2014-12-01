@@ -1,7 +1,16 @@
 class Rational {
+
+  public static final int ZERO = 0;
+  public static final int ONE = 1;
+
+  static int getValueFromUser(String type){
+    String data = javax.swing.JOptionPane.showInputDialog("Enter a " + type);
+    return Integer.parseInt(data);
+  }
   public static void main(String[] args) {
-    Rational oneOverThree = new Rational(1, 3);
-    Rational twoOverThree = new Rational(2, 3);
+
+    Rational oneOverThree = new Rational();
+    Rational twoOverThree = new Rational();
     Rational r1 = oneOverThree.mul(oneOverThree);
     Rational r2 = oneOverThree.mul(twoOverThree);
 
@@ -14,22 +23,36 @@ class Rational {
     Rational r7 = oneOverThree.sub(oneOverThree);
     Rational r8 = oneOverThree.sub(twoOverThree);
 
-    System.out.println("Solution of " + oneOverThree + "* " + oneOverThree + " = " + r1);
-    System.out.println("Solution of " + oneOverThree + "* " + twoOverThree + " = " + r2);
-    System.out.println("Solution of " + oneOverThree + "/ " + oneOverThree + " = " + r3);
-    System.out.println("Solution of " + oneOverThree + "/ " + twoOverThree + " = " + r4);
-    System.out.println("Solution of " + oneOverThree + "+ " + oneOverThree + " = " + r5);
-    System.out.println("Solution of " + oneOverThree + "+ " + twoOverThree + " = " + r6);
-    System.out.println("Solution of " + oneOverThree + "- " + oneOverThree + " = " + r7);
-    System.out.println("Solution of " + oneOverThree + "- " + twoOverThree + " = " + r8);
+    System.out.println("Solution of " + oneOverThree + " * " + oneOverThree + " = " + r1);
+    System.out.println("Solution of " + oneOverThree + " * " + twoOverThree + " = " + r2);
+    System.out.println("Solution of " + oneOverThree + " / " + oneOverThree + " = " + r3);
+    System.out.println("Solution of " + oneOverThree + " / " + twoOverThree + " = " + r4);
+    System.out.println("Solution of " + oneOverThree + " + " + oneOverThree + " = " + r5);
+    System.out.println("Solution of " + oneOverThree + " + " + twoOverThree + " = " + r6);
+    System.out.println("Solution of " + oneOverThree + " - " + oneOverThree + " = " + r7);
+    System.out.println("Solution of " + oneOverThree + " - " + twoOverThree + " = " + r8);
   }
 
   private int numerator;
   private int denominator;
 
   public Rational(int numerator, int denominator){
-    this.numerator = numerator
-    this.denominator = denominator
+    this.numerator = numerator;
+    this.denominator = denominator;
+    if (denominator == 0) {
+      throw IllegalArgumentException;
+    }
+  }
+
+  public Rational(){
+    this.numerator = getValueFromUser("numerator");
+    this.denominator = getValueFromUser("denominator");
+  }
+
+  public void reduce(){
+    int gcd = gcd(this.numerator, this.denominator);
+    this.numerator /= gcd;
+    this.denominator /= gcd;
   }
 
   public Rational mul(Rational arg){
@@ -52,16 +75,42 @@ class Rational {
 
   public Rational div(Rational arg){
     int numerator = this.numerator * arg.denominator;
-    int denominator = this.denominator * arg.nominator;
+    int denominator = this.denominator * arg.numerator;
     return new Rational (numerator, denominator);
   }
 
-  private static int compare(Rational larg, Rationa rarg){
-    return this.numerator * arg.denominator - this.denominator * arg.numerator;
+    public Rational mul(int val){
+    int numerator = this.numerator * arg.numerator;
+    int denominator = this.denominator * 1;
+    return new Rational(numerator, denominator);
+  }
+
+  public Rational add(int val){
+    int numerator = this.numerator * 1 + (this.denominator * arg.numerator);
+    int denominator = this.denominator * 1;
+    return new Rational (numerator, denominator);
+  }
+
+  public Rational sub(int val){
+    int numerator = this.numerator * 1 - (this.denominator * arg.numerator);
+    int denominator = this.denominator * 1;
+    return new Rational (numerator, denominator);
+  }
+
+  public Rational div(int val){
+    int numerator = this.numerator * 1;
+    int denominator = this.denominator * arg.numerator;
+    return new Rational (numerator, denominator);
+  }
+
+
+
+  private static int compare(Rational larg, Rational rarg){
+    return larg.numerator * rarg.denominator - larg.denominator * rarg.numerator;
   }
 
   public boolean equals(Rational arg){
-    return Rational.compare(this, arg) == 0
+    return Rational.compare(this, arg) == 0;
   }
 
   public boolean lessThan(Rational arg){
@@ -73,29 +122,25 @@ class Rational {
   }
 
   public boolean lessThanOrEqual(Rational arg){
-    if (this.denominator * arg.denominator < 0) {
-      return Rational.compare(this, arg) >= 0;
-    } else {
-      return Rational.compare(this, arg) <= 0;
-    }
+    return lessThan(arg) || equals(arg);
   }
 
   public boolean greaterThan(Rational arg){
     if (this.denominator * arg.denominator < 0) {
-      return this.numerator * arg.denominator < this.denominator * arg.numerator;
+      return Rational.compare(this, arg) > 0;
     } else {
-      return this.numerator * arg.denominator > this.denominator * arg.numerator;
+      return Rational.compare(this, arg) < 0;
     }
   }
 
   public boolean greaterThanOrEqual(Rational arg){
-    return equals(arg) || greaterThan(arg)
+    return equals(arg) || greaterThan(arg);
   }
 
   public String toString(){
     if (this.numerator == 0) 
       return "0";
-    return (this.numerator == this.denominator) ? ("" + this.numerator) ("" + this.numerator + "/" + this.denominator);
+    return (this.numerator == this.denominator) ? ("" + this.numerator) : ("" + this.numerator + "/" + this.denominator);
   }
 
   private int gcd(int a, int b){
