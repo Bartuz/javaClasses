@@ -1,7 +1,7 @@
 class Rational {
 
-  public static final int ZERO = 0;
-  public static final int ONE = 1;
+  public static final int ZERO = new Rational(0, 1);
+  public static final int ONE = new Rational(1, 1);
 
   static int getValueFromUser(String type){
     String data = javax.swing.JOptionPane.showInputDialog("Enter a " + type);
@@ -9,8 +9,12 @@ class Rational {
   }
   public static void main(String[] args) {
 
-    Rational oneOverThree = new Rational();
-    Rational twoOverThree = new Rational();
+    try {
+      Rational oneOverThree = new Rational();
+      Rational twoOverThree = new Rational();
+    } catch(IllegalArgumentException e) {
+      System.out.println(e);
+    }
     Rational r1 = oneOverThree.mul(oneOverThree);
     Rational r2 = oneOverThree.mul(twoOverThree);
 
@@ -40,7 +44,7 @@ class Rational {
     this.numerator = numerator;
     this.denominator = denominator;
     if (denominator == 0) {
-      throw IllegalArgumentException;
+      throw new IllegalArgumentException("Zero denominator");
     }
   }
 
