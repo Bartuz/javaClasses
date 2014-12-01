@@ -28,9 +28,8 @@ class Rational {
   private int denominator;
 
   public Rational(int numerator, int denominator){
-    int gcd = gcd(numerator, denominator);
-    this.numerator = numerator/gcd;
-    this.denominator = denominator/gcd;
+    this.numerator = numerator
+    this.denominator = denominator
   }
 
   public Rational mul(Rational arg){
@@ -57,24 +56,40 @@ class Rational {
     return new Rational (numerator, denominator);
   }
 
+  private static int compare(Rational larg, Rationa rarg){
+    return this.numerator * arg.denominator - this.denominator * arg.numerator;
+  }
+
   public boolean equals(Rational arg){
-    return this.numerator == arg.numerator && this.denominator == arg.denominator;
+    return Rational.compare(this, arg) == 0
   }
 
   public boolean lessThan(Rational arg){
-    return this.denominator >= arg.denominator && this.nominator < arg.nominator;
+    if (this.denominator * arg.denominator < 0) {
+      return Rational.compare(this, arg) > 0;
+    } else {
+      return Rational.compare(this, arg) < 0;
+    }
   }
 
   public boolean lessThanOrEqual(Rational arg){
-    return this.denominator >= arg.denominator && this.nominator <= arg.nominator;
+    if (this.denominator * arg.denominator < 0) {
+      return Rational.compare(this, arg) >= 0;
+    } else {
+      return Rational.compare(this, arg) <= 0;
+    }
   }
 
   public boolean greaterThan(Rational arg){
-    return this.denominator <= arg.denominator && this.nominator > arg.nominator;
+    if (this.denominator * arg.denominator < 0) {
+      return this.numerator * arg.denominator < this.denominator * arg.numerator;
+    } else {
+      return this.numerator * arg.denominator > this.denominator * arg.numerator;
+    }
   }
 
   public boolean greaterThanOrEqual(Rational arg){
-    return this.denominator <= arg.denominator && this.nominator >= arg.nominator;
+    return equals(arg) || greaterThan(arg)
   }
 
   public String toString(){
