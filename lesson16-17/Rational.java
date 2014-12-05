@@ -111,9 +111,9 @@ class Rational {
 
   public boolean greaterThan(Rational arg){
     if (this.denominator * arg.denominator < 0) {
-      return Rational.compare(this, arg) > 0;
-    } else {
       return Rational.compare(this, arg) < 0;
+    } else {
+      return Rational.compare(this, arg) > 0;
     }
   }
 
