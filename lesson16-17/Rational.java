@@ -1,7 +1,7 @@
 class Rational {
 
-  public static final int ZERO = new Rational(0, 1);
-  public static final int ONE = new Rational(1, 1);
+  public static final Rational ZERO = new Rational(0, 1);
+  public static final Rational ONE = new Rational(1, 1);
 
   static int getValueFromUser(String type){
     String data = javax.swing.JOptionPane.showInputDialog("Enter a " + type);
@@ -15,26 +15,6 @@ class Rational {
     } catch(IllegalArgumentException e) {
       System.out.println(e);
     }
-    Rational r1 = oneOverThree.mul(oneOverThree);
-    Rational r2 = oneOverThree.mul(twoOverThree);
-
-    Rational r3 = oneOverThree.div(oneOverThree);
-    Rational r4 = oneOverThree.div(twoOverThree);
-
-    Rational r5 = oneOverThree.add(oneOverThree);
-    Rational r6 = oneOverThree.add(twoOverThree);
-
-    Rational r7 = oneOverThree.sub(oneOverThree);
-    Rational r8 = oneOverThree.sub(twoOverThree);
-
-    System.out.println("Solution of " + oneOverThree + " * " + oneOverThree + " = " + r1);
-    System.out.println("Solution of " + oneOverThree + " * " + twoOverThree + " = " + r2);
-    System.out.println("Solution of " + oneOverThree + " / " + oneOverThree + " = " + r3);
-    System.out.println("Solution of " + oneOverThree + " / " + twoOverThree + " = " + r4);
-    System.out.println("Solution of " + oneOverThree + " + " + oneOverThree + " = " + r5);
-    System.out.println("Solution of " + oneOverThree + " + " + twoOverThree + " = " + r6);
-    System.out.println("Solution of " + oneOverThree + " - " + oneOverThree + " = " + r7);
-    System.out.println("Solution of " + oneOverThree + " - " + twoOverThree + " = " + r8);
   }
 
   private int numerator;
@@ -84,26 +64,26 @@ class Rational {
   }
 
     public Rational mul(int val){
-    int numerator = this.numerator * arg.numerator;
+    int numerator = this.numerator * val;
     int denominator = this.denominator * 1;
     return new Rational(numerator, denominator);
   }
 
   public Rational add(int val){
-    int numerator = this.numerator * 1 + (this.denominator * arg.numerator);
+    int numerator = this.numerator * 1 + (this.denominator * val);
     int denominator = this.denominator * 1;
     return new Rational (numerator, denominator);
   }
 
   public Rational sub(int val){
-    int numerator = this.numerator * 1 - (this.denominator * arg.numerator);
+    int numerator = this.numerator * 1 - (this.denominator * val);
     int denominator = this.denominator * 1;
     return new Rational (numerator, denominator);
   }
 
   public Rational div(int val){
     int numerator = this.numerator * 1;
-    int denominator = this.denominator * arg.numerator;
+    int denominator = this.denominator * val;
     return new Rational (numerator, denominator);
   }
 
