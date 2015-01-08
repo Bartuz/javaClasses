@@ -15,6 +15,7 @@ public class NoughtsAndCrosses {
       getMove();
       computerMove();
     }while(!gameOver());
+    System.out.println("We've got the winner!");
   }
 
   public void displayBoard(){
@@ -35,8 +36,11 @@ public class NoughtsAndCrosses {
 
 
   private void getMove(){
-    String userInput = javax.swing.JOptionPane.showInputDialog("Select a field (e.g. A2)");
-    int[] cords = stringToCords(userInput);
+    int[] cords = null;
+    do {
+      String userInput = javax.swing.JOptionPane.showInputDialog("Select a field (e.g. A2)");
+      cords = stringToCords(userInput);
+    } while(this.board[cords[0]][cords[1]] != 0);
     this.board[cords[0]][cords[1]] = 1;
   }
 
@@ -52,7 +56,7 @@ public class NoughtsAndCrosses {
       leftCord = (int)(Math.random() * 3);
       topCord = (int)(Math.random() * 3);
     } while(this.board[leftCord][topCord] != 0);
-    this.board[leftCord][topCord] = 2;
+    this.board[leftCord][topCord] = -1;
   }
 
   private boolean gameOver(){
@@ -71,15 +75,10 @@ public class NoughtsAndCrosses {
 
   private boolean isWinner(){
     for (int i = 0; i < 3; i++) {
-      if ((this.board[0][i] != 0 && this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i])
-          || (this.board[i][0] != 0 && this.board[i][0] == this.board[i][1] && this.board[i][1] == this.board[i][2])
-          || (this.board[i][i] != 0 && this.board[i][i] == this.board[i][i] && this.board[i][i] == this.board[i][i])
-          || (this.board[i][2- i] != 0 && this.board[i][2- i] == this.board[i][2- i] && this.board[i][2- i] == this.board[i][2- i])
-          || (this.board[2- i][i] != 0 && this.board[2- i][i] == this.board[2- i][i] && this.board[2- i][i] == this.board[2- i][i]))
-        return true;
-      System.out.println("WINNER");
+      for (int j = 0; j < 3; j++) {
+        this.board[i][j]
+      }
     }
-    return false;
   }
 
 }
